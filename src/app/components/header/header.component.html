@@ -1,0 +1,25 @@
+<mat-toolbar>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+    <button mat-icon-button class="mr-4">
+      <mat-icon class="h1">notifications_none</mat-icon>
+    </button>
+  <div class='mr-4'>
+    BALANCE <br>
+    <span class="text-success">N0.00</span>
+  </div>
+  <div class="h-100 mr-4">
+    <img class="header-img" src="assets/icons/nestle.webp" alt="nestle icon">
+  </div>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Help</button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" class="mr-4">
+    Nestle
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+</mat-toolbar>

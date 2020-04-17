@@ -1,0 +1,304 @@
+<div class="row mt-3">
+    <div class="col-md-9 col-12">
+        <div class="row">
+            <div class="col-2">
+                <div class="card" background="primary">
+                    <div class="card-body my-1 text-center text-bold">
+                        Coffee
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-body my-1 text-center text-bold">
+                        Maize
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-body my-1 text-center text-bold">
+                        Cocoa
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-body my-1 text-center text-bold">
+                        Soybean
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-body text-center text-bold">
+                        <mat-icon>add</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-3">
+                <mat-menu #appMenu="matMenu">
+                <button mat-menu-item>Settings</button>
+                <button mat-menu-item>Help</button>
+                </mat-menu>
+
+                <button mat-icon-button [matMenuTriggerFor]="appMenu" class="h3">
+                Coffee
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+            </div>
+            <div class="col-3">
+                <small class="text-muted">
+                    Last Price
+                </small><br>
+                <span class="text-bold">
+                    605,458.00 &nbsp;&nbsp;&nbsp;NGN/t
+                </span>
+            </div>
+            <div class="col-3">
+                <small class="text-muted">
+                    Volume
+                </small><br>
+                <span class="text-bold">
+                    24
+                </span>
+            </div>
+            <div class="col-3">
+                <small class="text-muted">
+                    Time
+                </small><br>
+                <mat-menu #timeMenu="matMenu">
+                <button mat-menu-item>Settings</button>
+                <button mat-menu-item>Help</button>
+                </mat-menu>
+
+                <button mat-icon-button [matMenuTriggerFor]="timeMenu">
+                1 hour
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="chart">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 col-12 d-flex align-items-end mb-md-5 pl-md-3">
+        <div>
+            <h1 class="text-bold">Balance</h1>
+            <div class="card mat-elevation-z8">
+                <div class="card-body">
+                       <form class="w-100">
+                           <div class="form-group row">
+                               <label for="noc" class=" col-form-label">Number of Contract(s)</label>
+                                   <input type="text" class="form-control w-100" name="noc" placeholder="">
+                           </div>
+                           <div class="form-group row">
+                                   <button class="btn btn-secondary btn-block" disabled>1 contract equals 30 tons</button>
+                           </div>
+                           <div class="form-group row">
+                                    <div class="col-12 text-bold mb-3 pl-1">Delivery</div>
+                                        <div class="col-3 px-1">
+                                            <button type="button" class="btn balance-btn btn-outline-primary btn-sm">Spot</button>
+                                        </div>
+                                        <div class="col-3 px-1">
+                                            <button type="button" class="btn balance-btn btn-outline-primary btn-sm">3 Months</button>
+                                        </div>
+                                        <div class="col-3 px-1">
+                                            <button type="button" class="btn balance-btn btn-outline-primary btn-sm">6 Months</button>
+                                        </div>
+                                        <div class="col-3 px-1">
+                                            <button type="button" class="btn balance-btn btn-outline-primary btn-sm">9 Months</button>
+                                        </div>
+                           </div>
+                           <div class="form-group row">
+                                   <button type="submit" class="btn btn-primary btn-block">Proceed</button>
+                           </div>
+                       </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-12">
+         <div class="row mt-5">
+            <mat-tab-group mat-stretch-tabs dynamicHeight class="w-100">
+                <mat-tab class="text-bold" label="Pending Offers">
+                
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="trader">
+                            <th mat-header-cell *matHeaderCellDef> TRADER </th>
+                            <td mat-cell *matCellDef="let offer"> {{offer.trader}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="price">
+                            <th mat-header-cell *matHeaderCellDef> PRICE </th>
+                            <td mat-cell *matCellDef="let offer"> {{offer.price}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="contract">
+                            <th mat-header-cell *matHeaderCellDef> CONTRACT </th>
+                            <td mat-cell *matCellDef="let offer"> {{offer.contract}} &nbsp;(7) </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="totalPrice">
+                            <th mat-header-cell *matHeaderCellDef> TOTAL PRICE </th>
+                            <td mat-cell *matCellDef="let offer"> {{offer.totalPrice}} </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="viewOffer">
+                            <th mat-header-cell *matHeaderCellDef> VIEW OFFER </th>
+                            <td mat-cell *matCellDef="let offer; let i = index"> 
+                                <mat-menu #viewOffer="matMenu">
+                                <button mat-menu-item>Settings</button>
+                                <button mat-menu-item>Help</button>
+                                </mat-menu>
+
+                                <button mat-raised-button [matMenuTriggerFor]="viewOffer" color="primary"> 
+                                VIEW
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                </button>
+                             </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="negotiate">
+                            <th mat-header-cell *matHeaderCellDef> NEGOTIATE </th>
+                            <td mat-cell *matCellDef="let offer; let i = index"> 
+                                <mat-menu #negotiate="matMenu">
+                                <button mat-menu-item>Settings</button>
+                                <button mat-menu-item>Help</button>
+                                </mat-menu>
+
+                                <button mat-raised-button [matMenuTriggerFor]="negotiate" color="warn"> 
+                                BID
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                </button>
+                             </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="accept">
+                            <th mat-header-cell *matHeaderCellDef> ACCEPT </th>
+                            <td mat-cell *matCellDef="let offer; let i = index"> 
+                                <mat-menu #accept="matMenu">
+                                <button mat-menu-item>Settings</button>
+                                <button mat-menu-item>Help</button>
+                                </mat-menu>
+
+                                <button mat-raised-button [matMenuTriggerFor]="accept" color="accent"> 
+                                VIEW
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                </button>
+                             </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+                 </mat-tab>
+
+                <mat-tab class="text-bold" label="Transanction History">
+                    <table mat-table [dataSource]="historySource" class="mat-elevation-z8 w-100">
+
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="sn">
+                            <th mat-header-cell *matHeaderCellDef> </th>
+                            <td mat-cell *matCellDef="let history; let i = index" class="text-muted"> {{ i + 1 }} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="transactionId">
+                            <th mat-header-cell *matHeaderCellDef> TRANSACTION ID </th>
+                            <td mat-cell *matCellDef="let history"> {{history.transactionId}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="deliveryDate">
+                            <th mat-header-cell *matHeaderCellDef> DELIVERY DATE </th>
+                            <td mat-cell *matCellDef="let history"> {{history.deliveryDate}} </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> STATUS </th>
+                            <td mat-cell *matCellDef="let history"> {{history.status}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="historyColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: historyColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator> 
+                 </mat-tab>
+
+                <mat-tab class="text-bold" label="Active orders(0)">
+                    Active orders(0) 
+                 </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <div class="col-md-3 col-12 pt-5">
+    <span class="font-weight-bold">News Update</span>
+        <div class="card mt-2">
+            <div class="card-header bg-primary text-light">
+                News/Latest Stories
+            </div>
+            <div class="card-body px-1">
+                <mat-list>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                </mat-list>
+
+                <div>
+                    <button mat-button>
+                        <mat-icon>keyboard_arrow_down</mat-icon> <span class="text-primary">More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

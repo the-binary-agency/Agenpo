@@ -1,0 +1,7 @@
+mat-sidenav-container{
+    height: calc(100% - 64px);
+}
+.list-item-active{
+    color: var(--primary);
+    font-weight: bold;
+}
