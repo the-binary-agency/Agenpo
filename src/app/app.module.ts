@@ -8,19 +8,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ChartsModule } from 'ng2-charts';
 import { WalletComponent } from './views/wallet/wallet.component';
-
-//Angular Material Components
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavService } from './services/nav.service';
 import { HomeComponent } from './views/home/home.component';
-import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+import { MatModule } from './components/mat.module';
 
 @NgModule({
   declarations: [
@@ -35,18 +25,9 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     BrowserAnimationsModule,
     ChartsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
+    MatModule,
   ],
-  providers: [],
+  providers: [NavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

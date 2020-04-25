@@ -1,7 +1,17 @@
 mat-sidenav-container{
     height: calc(100% - 64px);
+    /* z-index: -1; */
 }
 .list-item-active{
     color: var(--primary);
     font-weight: bold;
+}
+.logo-container{
+    width: 100px;
+}
+.logo-container img{
+    /* width: 80px;
+    margin: auto; */
+    position: absolute;
+    bottom: 20px;
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { NavService } from 'src/app/services/nav.service';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +11,13 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor() { }
+  constructor(private sidenavService: NavService, public sidenav: SidenavComponent) { }
 
   ngOnInit(): void {
+  }
+
+  clickMenu() { 
+    this.sidenavService.toggle();
   }
 
 }
