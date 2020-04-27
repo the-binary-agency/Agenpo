@@ -2,28 +2,28 @@
     <div class="col-md-9 col-12">
         <div class="row">
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card bg-primary fake-btn">
+                <div class="card fake-btn" [class.bg-primary] ="activeProduce == 'Coffee'" (click)="activeProduce = 'Coffee'">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Coffee
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn">
+                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Maize'" (click)="activeProduce = 'Maize'">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Maize
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn">
+                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Cocoa'" (click)="activeProduce = 'Cocoa'">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Cocoa
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn">
+                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Soybean'" (click)="activeProduce = 'Soybean'">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Soybean
                     </div>
@@ -41,7 +41,7 @@
         <div class="row mt-4">
             <div class="col px-1 px-md-3">
                 <span class="h4 fake-btn text-nowrap" (click)="detailsExpanded = !detailsExpanded">
-                Coffee
+                {{ activeProduce }}
                 <mat-icon *ngIf="!detailsExpanded">keyboard_arrow_down</mat-icon>
                 <mat-icon *ngIf="detailsExpanded">keyboard_arrow_up</mat-icon>
                 </span>
@@ -50,6 +50,7 @@
                 <small class="text-muted">
                     Last Price
                 </small><br>
+                <div class="gap-2"></div>
                 <span class="text-bold">
                     605,458.00 &nbsp;&nbsp;&nbsp;NGN/t
                 </span>
@@ -58,6 +59,7 @@
                 <small class="text-muted">
                     Volume
                 </small><br>
+                <div class="gap-2"></div>
                 <span class="text-bold">
                     24
                 </span>
@@ -67,11 +69,11 @@
                     Time
                 </small><br>
                 <mat-menu #timeMenu="matMenu">
-                <button mat-menu-item>Settings</button>
-                <button mat-menu-item>Help</button>
+                <button mat-menu-item>2 hours</button>
+                <button mat-menu-item>3 hours</button>
                 </mat-menu>
 
-                <button mat-icon-button [matMenuTriggerFor]="timeMenu">
+                <button mat-icon-button class="" [matMenuTriggerFor]="timeMenu">
                 1 hour
                 <mat-icon>keyboard_arrow_down</mat-icon>
                 </button>
@@ -81,7 +83,8 @@
         <div class="row mt-4">
 
            <div class="col-12 bg-white" *ngIf="detailsExpanded">
-             <table  class="table-responsive-sm table-borderless w-100">
+            <div class="table-responsive-sm">
+                 <table  class="table table-borderless">
                 <thead>
                     <tr>
                         <th class="w-md-40">Transaction ID</th>
@@ -101,6 +104,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <mat-list role="list">
 
@@ -147,7 +151,7 @@
     <div class="col-md-3 col-12 d-flex align-items-start pt-md-5 mb-md-5 pl-md-3">
         <div class="mt-md-5">
             <h1 class="text-bold">Balance</h1>
-            <div class="card mat-elevation-z1">
+            <div class="card mat-elevation-z1 w-100">
                 <div class="card-body">
                        <form class="w-100">
                            <div class="form-group row">
@@ -201,7 +205,7 @@
                         <ng-container matColumnDef="price">
                             <mat-header-cell *matHeaderCellDef> PRICE </mat-header-cell>
                                 <mat-cell *matCellDef="let offer; let i = index" data-label="price">
-                                    <input type="text" class="form-control mr-3" name="" #bidEdit value="{{ offer.price }}" *ngIf="edit( i ) == true" on-focusout="cancelBid()">
+                                    <input type="text" class="form-control mr-0 mr-md-3 w-60 w-md-100 float-right" #bidEdit value="{{ offer.price }}" *ngIf="edit( i ) == true" on-focusout="cancelBid()">
                                     <span *ngIf="edit( i ) == false"> {{offer.price}} </span>
                                 </mat-cell>
                         </ng-container>
@@ -215,16 +219,16 @@
                         <!-- Symbol Column -->
                         <ng-container matColumnDef="totalPrice">
                             <mat-header-cell *matHeaderCellDef> TOTAL PRICE </mat-header-cell>
-                            <mat-cell *matCellDef="let offer" data-label="totalPrice"> {{offer.totalPrice}} </mat-cell>
+                            <mat-cell *matCellDef="let offer" data-label="total Price"> {{offer.totalPrice}} </mat-cell>
                         </ng-container>
 
                         <!-- Symbol Column -->
                         <ng-container matColumnDef="viewOffer">
                             <mat-header-cell *matHeaderCellDef> VIEW OFFER </mat-header-cell>
-                            <mat-cell *matCellDef="let offer; let i = index" data-label="viewOffer"> 
+                            <mat-cell *matCellDef="let offer; let i = index" data-label="view Offer"> 
                                 <mat-menu #viewOffer="matMenu">
-                                <button mat-menu-item>Settings</button>
-                                <button mat-menu-item>Help</button>
+                                <button mat-menu-item>Option 1</button>
+                                <button mat-menu-item>Option 2</button>
                                 </mat-menu>
 
                                 <button mat-raised-button [matMenuTriggerFor]="viewOffer" color="primary"> 

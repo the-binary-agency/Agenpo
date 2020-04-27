@@ -21,9 +21,9 @@ export interface TransactionHistory {
 
 const ELEMENT_DATA: PendingOffers[] = [
   {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
-  {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: 'H423,000', viewOffer: '', negotiate: '', accept: ''},
-  {price: '123,000', trader: 'CX32ML', contract:5, totalPrice: 'L423,000', viewOffer: '', negotiate: '', accept: ''},
-  {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: 'B423,000', viewOffer: '', negotiate: '', accept: ''},
+  {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
+  {price: '123,000', trader: 'CX32ML', contract:5, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
+  {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
   {price: '123,000', trader: 'CX32ML', contract: 5, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
   {price: '123,000', trader: 'CX32ML', contract: 15, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
   {price: '123,000', trader: 'CX32ML', contract: 15, totalPrice: '423,000', viewOffer: '', negotiate: '', accept: ''},
@@ -104,5 +104,7 @@ export class HomeComponent implements OnInit {
   cancelBid() {
     this.tobid = null;
   }
+
+  activeProduce: string = 'Coffee';
 
 }

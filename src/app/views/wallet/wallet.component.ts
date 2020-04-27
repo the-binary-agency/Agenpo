@@ -34,15 +34,27 @@ export class WalletComponent implements OnInit {
   @ViewChild( MatSort, { static: true } ) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
-  constructor () { }
+  constructor () {
+    this.changeSidenavMode();
+  }
   
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'status'];
   dataSource = new MatTableDataSource( ELEMENT_DATA );
   resultsLength = ELEMENT_DATA.length
+  screenWidth: number;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  changeSidenavMode() {
+    // set screenWidth on page load
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      // set screenWidth on screen size change
+      this.screenWidth = window.innerWidth;
+    };
   }
 
 }

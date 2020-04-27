@@ -1,6 +1,9 @@
 .table td:not(:nth-child(1)){
     text-align: center;
 }
+.gap-2{
+  height: 10px;
+}
 .chart{
     width: 100%;
     display: block;
@@ -16,7 +19,7 @@
     font-size: xx-small;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 768px) {
   .mat-table {
     border: 0;
     vertical-align: middle

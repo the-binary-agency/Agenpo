@@ -22,7 +22,7 @@ export class SidenavComponent implements OnInit {
    this.sideNavService.sideNavToggleSubject.subscribe(()=> {
       this.sidenav.toggle();
    } );
-    if ( this.screenWidth > 840 ) {
+    if ( this.screenWidth > 768 ) {
       this.sidenav.open();
     } else {
       this.sidenav.close();

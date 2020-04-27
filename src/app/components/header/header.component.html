@@ -13,11 +13,11 @@
     <span class="text-success">N0.00</span>
   </div>
   <div class="h-100 mr-1 mr-md-4" *ngIf="sidenav.screenWidth > 840">
-    <img class="header-img" src="assets/icons/nestle.webp" alt="nestle icon">
+    <img class="header-img" src="assets/icons/nestle-icon.png" alt="nestle icon">
   </div>
   <mat-menu #appMenu="matMenu">
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Help</button>
+    <button mat-menu-item>Dropdown 1</button>
+    <button mat-menu-item>Dropdown 2</button>
   </mat-menu>
 
   <button mat-icon-button [matMenuTriggerFor]="appMenu" class="mr-md-4" *ngIf="sidenav.screenWidth > 840">
@@ -32,14 +32,14 @@
 </button>
 
 <mat-menu #subMenu="matMenu">
-  <button mat-menu-item>Settings</button>
-  <button mat-menu-item>Help</button>
+  <button mat-menu-item>Dropdown 1</button>
+  <button mat-menu-item>Dropdown 2</button>
 </mat-menu>
 
   <mat-menu #resMenu="matMenu">
-    <button mat-menu-item>
+    <!-- <button mat-menu-item>
     Settings
-    </button>
+    </button> -->
     <button mat-menu-item>
         <button mat-icon-button>
             <mat-icon matBadge="15" matBadgeColor="warn" class="h1">notifications_none</mat-icon>
@@ -50,6 +50,11 @@
             BALANCE <br>
             <span class="text-success">N0.00</span>
         </div>
+    </button>
+    <button mat-menu-item>
+       <div class="h-100">
+        <img class="h-100" src="assets/icons/nestle-icon.png" alt="nestle icon">
+      </div>
     </button>
     <button mat-menu-item [matMenuTriggerFor]="subMenu">
         <button mat-icon-button>

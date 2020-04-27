@@ -1,39 +1,39 @@
-<div class="card w-100 h-100">
+<div class="card w-100 h-100 mt-4">
     <div class="card-header bg-light">
         Available Balance <br>
         <span class="text-success">N0.00</span>
     </div>
     <div class="card-body">
        <mat-tab-group mat-stretch-tabs dynamicHeight class="example-stretched-tabs">
-        <mat-tab label="DEPOSIT">
-            <div class="form-group w-70 mt-5">
+        <mat-tab [label]="(screenWidth > 768) ? 'DEPOSIT' : 'Deposit'">
+            <div class="form-group w-md-70 mt-5">
                 <label for="deposit">Amount</label>
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-12 col-md-7">
                         <input type="text" name="deposit" id="" class="form-control w-100" placeholder="" aria-describedby="helpId">
                     </div>
-                    <div class="col">
-                    <button class="btn btn-primary d-block text-nowrap btn-sm" type="button" aria-label="">MAKE DEPOSIT</button>
+                    <div class="col-12 col-md mt-2 mt-md-0">
+                    <button class="btn btn-primary d-block text-nowrap float-right float-md-left" type="button" aria-label="">MAKE DEPOSIT</button>
                     </div>
                 </div>
                 <small id="helpId" class="text-muted">Inclusive of N1000.00 transaction fee</small>
             </div>
         </mat-tab>
-        <mat-tab label="WITHDRAW">
-            <div class="form-group w-70 mt-5">
+        <mat-tab [label]="(screenWidth > 768) ? 'WITHDRAW' : 'Withdraw'">
+            <div class="form-group w-md-70 mt-5">
                 <label for="deposit">Amount</label>
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-12 col-md-7">
                         <input type="text" name="deposit" id="" class="form-control w-100" placeholder="" aria-describedby="helpId">
                     </div>
-                    <div class="col">
-                    <button class="btn btn-primary d-block" type="button" aria-label="">WITHDRAW</button>
+                    <div class="col-12 col-md mt-2 mt-md-0">
+                    <button class="btn btn-primary d-block float-right float-md-left" type="button" aria-label="">WITHDRAW</button>
                     </div>
                 </div>
                 <small id="helpId" class="text-muted">Inclusive of N1000.00 transaction fee</small>
             </div>
         </mat-tab>
-        <mat-tab label="TRANSACTION HISTORY">
+        <mat-tab [label]="(screenWidth > 768) ? 'TRANSACTION HISTORY' : 'Transaction History'">
         <div class="example-container mat-elevation-z8">
 
             <table mat-table [dataSource]="dataSource" matSort class="w-100 history-table">
