@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { NavService } from 'src/app/services/nav.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,15 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor(private sidenavService: NavService, public sidenav: SidenavComponent) { }
+  constructor ( private sidenavService: NavService, public sidenav: SidenavComponent, public router: Router ) { 
+    router.events.subscribe(e => {
+      if(e instanceof NavigationEnd){
+        this.url = e.url;
+      }
+    });
+  }
+
+  url: string;
 
   ngOnInit(): void {
   }
@@ -19,5 +28,6 @@ export class HeaderComponent implements OnInit {
   clickMenu() { 
     this.sidenavService.toggle();
   }
+  
 
 }

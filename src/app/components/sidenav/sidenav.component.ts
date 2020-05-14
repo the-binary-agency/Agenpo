@@ -15,6 +15,7 @@ export class SidenavComponent implements OnInit {
    }
 
   screenWidth: number;
+  lastHome: string;
 
   ngOnInit(): void { }
   

@@ -1,9 +1,6 @@
 .table td:not(:nth-child(1)){
     text-align: center;
 }
-.gap-2{
-  height: 10px;
-}
 .chart{
     width: 100%;
     /* height: 300px; */
@@ -13,13 +10,6 @@
 }
 .highcharts-container{
   height: 100% !important;
-}
-.canvas2{
-    height: inherit !important;
-}
-.balance-btn{
-    width: 100%;
-    font-size: xx-small;
 }
 
 @media screen and (max-width: 768px) {
@@ -85,13 +75,7 @@
     padding-left: 0;
   }
 }
-
-.view-btn{
-  color: white;
-  background-color: #081AFE;
-}
-
-.bid-btn{
-  color: white;
-  background-color: #D68907;
+.confirmation-circle{
+  border-radius: 100%;
+  background-color: #ddd;
 }

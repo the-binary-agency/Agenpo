@@ -1,0 +1,82 @@
+<div class="row mt-2 mt-md-5">
+    <div class="col-4 mb-3 col-md-auto">
+        <div class="btn border px-4" [ngClass]="calculateClasses('Coffee')" (click)="activeProduce = 'Coffee'">
+                Coffee
+        </div>
+    </div>
+    <div class="col-4 mb-3 col-md-auto">
+        <div class="btn border px-4"  [ngClass]="calculateClasses('Maize')" (click)="activeProduce = 'Maize'">
+                Maize
+        </div>
+    </div>
+    <div class="col-4 mb-3 col-md-auto">
+        <div class="btn border px-4"  [ngClass]="calculateClasses('Cocoa')" (click)="activeProduce = 'Cocoa'">
+                Cocoa
+        </div>
+    </div>
+    <div class="col-4 mb-3 col-md-auto">
+        <div class="btn border px-4"  [ngClass]="calculateClasses('Soybeans')" (click)="activeProduce = 'Soybeans'">
+                Soybeans
+        </div>
+    </div>
+    <div class="col-auto mb-3 col-md-2">
+          <input type="search" class="form-control text-center bg-light" name="" id="search" placeholder="Search">
+    </div>
+</div>
+
+<div class="w-100 mt-4 mr-0">
+    <mat-tab-group mat-stretch-tabs dynamicHeight class="w-100">
+        <mat-tab label="Transaction History">
+            <div class="example-container mat-elevation-z8">
+                <div class="w-100 text-right pr-4 bg-white pt-4 pb-md-4">
+                    <i class="fa fa-filter fa-2x text-primary" aria-hidden="true"></i> Filter
+                </div>
+                <table mat-table [dataSource]="dataSource" matSort class="w-100 history-table">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="SN">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index" data-label=""> {{ i +1 }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="transactionID">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> TRANSACTION ID </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="transaction ID"> {{element.transactionID}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> PRICE </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="price"> {{element.price}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="noOfContracts">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> NO. OF CONTRACTS </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="no. Of Contracts"> {{element.noOfContracts}} (5)</mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="deliveryDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> DELIVERY DATE </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="delivery Date"> {{element.deliveryDate}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="status"> {{element.status}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </table>
+                <mat-paginator [length]="resultsLength" [pageSize]="5"></mat-paginator> 
+            </div>
+        </mat-tab>
+        <mat-tab label="Active Orders">
+            Content 2 
+        </mat-tab>
+    </mat-tab-group>
+</div>

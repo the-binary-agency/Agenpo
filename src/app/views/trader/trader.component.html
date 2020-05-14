@@ -1,0 +1,187 @@
+<div class="row mt-md-4">
+    <div class="col-md-8 col-12">
+
+        <!-- <div class="mt-4"> -->
+            <!-- Chart -->
+            <div class="chart" id="highChartContainer"></div>
+        <!-- </div> -->
+
+    </div>
+
+    <div class="col-md-4 col-12 mb-md-5 pl-md-4">
+        <div class="card mt-md-2 w-100">
+            <div class="card-header bg-primary text-light">
+                News/Latest Stories  ₦
+            </div>
+            <div class="card-body px-1">
+                <mat-list>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div matLine> 
+                        <mat-icon class="small">info</mat-icon>
+                        <a href="#" class="xsmall">Farmers' Harvest set to boom due to rainy season.</a></div>
+                        <div matLine><a href="#" class="xsmall">from infodock</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="xsmall">30 minutes ago</span></div>
+                </mat-list-item>
+                </mat-list>
+
+                <div>
+                    <button mat-button>
+                        <mat-icon>keyboard_arrow_down</mat-icon> <span class="text-primary">More</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-12">
+         <div class="row mt-5">
+            <mat-tab-group mat-stretch-tabs dynamicHeight class="w-100">
+                <mat-tab class="text-bold" label="Orders">
+                
+                    <mat-table [dataSource]="dataSource" class="w-100 table-responsive-sm">
+
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="time">
+                            <mat-header-cell *matHeaderCellDef> TIME </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="time"> {{offer.time}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="orderCode">
+                            <mat-header-cell *matHeaderCellDef> ORDER CODE </mat-header-cell>
+                                <mat-cell *matCellDef="let offer; let i = index" data-label="ORDER CODE"> {{offer.orderCode}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="commodity">
+                            <mat-header-cell *matHeaderCellDef> COMMODITY </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="commodity"> {{offer.commodity}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="size">
+                            <mat-header-cell *matHeaderCellDef> SIZE </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="size"> {{offer.size}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="delivery">
+                            <mat-header-cell *matHeaderCellDef> DELIVERY </mat-header-cell>
+                            <mat-cell *matCellDef="let offer; let i = index" data-label="delivery"> {{offer.delivery}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="offer">
+                            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+                            <mat-cell *matCellDef="let offer; let i = index" data-label=""> 
+                                <button type="button" class="btn btn-primary" (click)="offerr()">OFFER</button>
+                             </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator [length]="resultsLength" [pageSize]="5" #firstpaginator="matPaginator"></mat-paginator>
+                 </mat-tab>
+
+                <mat-tab class="text-bold" label="View Orders">
+                    Active orders(0) 
+                 </mat-tab>
+
+                <mat-tab class="text-bold" label="Transanction History">
+                    <mat-table [dataSource]="historySource" class="mat-elevation-z8 w-md-100 table-responsive-sm">
+
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                        
+                        <ng-container matColumnDef="sn">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let history; let i = index" class="text-muted" data-label="no."> {{ i + 1 }} </mat-cell>
+                        </ng-container>
+
+                        
+                        <ng-container matColumnDef="transactionId">
+                            <mat-header-cell *matHeaderCellDef> TRANSACTION ID </mat-header-cell>
+                            <mat-cell *matCellDef="let history" data-label="transaction Id"> {{history.transactionId}} </mat-cell>
+                        </ng-container>
+
+                        
+                        <ng-container matColumnDef="deliveryDate">
+                            <mat-header-cell *matHeaderCellDef> DELIVERY DATE </mat-header-cell>
+                            <mat-cell *matCellDef="let history" data-label="delivery Date"> {{history.deliveryDate}} </mat-cell>
+                        </ng-container>
+
+                        
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
+                            <mat-cell *matCellDef="let history" data-label="status"> {{history.status}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="historyColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: historyColumns;"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator [length]="resultsLength" [pageSize]="5" #historypaginator="matPaginator"></mat-paginator> 
+                 </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+    <div class="col-md-4 col-12 pt-5 pl-md-4">
+        <p class="font-weight-bold" *ngIf="toOffer">Offer Contract</p>
+        <div class="card" *ngIf="toOffer" id="offerCard">
+            <div class="card-body">
+                <div class="card-title">
+                SJFD6YAV
+               <button type="button" class="btn btn-clear float-right" (click)="cancelOffer()">
+                 <i class="fa fa-times text-danger" aria-hidden="true"></i>
+               </button>
+                </div>
+                <p class="text-muted">Offer 5 contracts of Cocoa</p>
+                <div class="row">
+                    <div class="col-6 mb-4">
+                          <input type="text" class="form-control" name="" id=""  placeholder="" value="5">
+                    </div>
+                    <div class="col-6 mb-4">
+                        <input type="text" class="form-control" name="" id=""  placeholder="input price per item">
+                    </div>
+                    <div class="col-6 mb-4 text-muted d-flex align-items-center">
+                    Total Sum
+                    </div>
+                    <div class="col-6 mb-4">
+                        <input type="text" class="form-control" name="" id=""  placeholder="">
+                    </div>
+                    <div class="col-12 pt-5">
+                        <button type="button" name="" id="" class="btn btn-primary btn-block" (click)="makeOffer()">Make Offer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- confirmation -->
+        <div class="card" *ngIf="offerSuccessfull">
+            <div class="card-body">
+                <div class="confirmation-circle d-flex align-items-center justify-content-center w-70 mx-auto mt-4 h-100">
+                    <i class="fa fa-check fa-5x text-success m-5" aria-hidden="true"></i>
+                </div>
+                <p class="card-text h5 mt-4 text-center">Successfull</p>
+            </div>
+        </div>
+    </div>
+</div>

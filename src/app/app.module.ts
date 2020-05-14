@@ -11,6 +11,10 @@ import { WalletComponent } from './views/wallet/wallet.component';
 import { NavService } from './services/nav.service';
 import { HomeComponent } from './views/home/home.component';
 import { MatModule } from './components/mat.module';
+import { ProfileComponent } from './views/profile/profile.component';
+import { TraderComponent } from './views/trader/trader.component';
+import { PositionComponent } from './views/position/position.component';
+import { TransactionsComponent } from './views/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { MatModule } from './components/mat.module';
     SidenavComponent,
     HomeComponent,
     HeaderComponent,
-    WalletComponent
+    WalletComponent,
+    ProfileComponent,
+    TraderComponent,
+    PositionComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,

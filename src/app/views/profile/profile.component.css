@@ -1,0 +1,28 @@
+img {
+    width: 100px;
+    height: auto;
+}
+.chip{
+    background-color: #EAEAEA;
+    border-radius: 20px
+}
+a:hover{
+    color: blue !important;
+}
+@media (min-width: 768px){
+    .settings-row{
+        position: relative;
+    }
+    .settings-row:after{
+        content: ""; /* This is necessary for the pseudo element to work. */ 
+        position: absolute;
+        bottom: 5%;
+        right: 0;
+        background: #EAEAEA;
+        height: 85%; /* Change this to whatever width you want. */
+        width: 2px; 
+    }
+  }
+  .font-bold {
+    font-weight: 560;
+}

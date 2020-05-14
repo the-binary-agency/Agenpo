@@ -39,6 +39,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+/* .custom-container{
+  max-width: 1366px;
+  margin: auto;
+} */
+
 .fake-btn{
   cursor: pointer;
 }
@@ -76,6 +82,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+ .w-30{
+    width: 30% !important;
+  }
  .w-40{
     width: 40% !important;
   }

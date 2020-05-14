@@ -1,0 +1,173 @@
+<div class="row mt-4 justify-content-end mr-2" *ngIf="buy == false">
+    <button type="button" class="btn btn-success big-buy" (click)="buy = true">BUY</button>
+</div>
+
+<div class="row mt-4" *ngIf="buy == false">
+    <div class="col-12 col-sm-auto mx-sm-auto cols-5 mb-4" *ngFor="let produce of produceList">
+        <div class="card mat-elevation-z6">
+        <img class="card-img-top" src="assets/images/{{ produce.image }}" alt="">
+        <div class="card-body">
+            <h4 class="card-title text-center text-uppercase text-muted">{{ produce.name }}</h4>
+            <div class="text-success font-weight-bold mt-2 float-left"> {{ produce.tons }} TONS </div>
+            <button type="button" class="btn float-right sell-btn px-3">SELL</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="row mt-4" [ngClass]="{'d-none': buy == false}">
+    <div class="col-12 col-md-9 pt-4 mat-elevation-z6 pb-4">
+        <span class="w-100 d-flex">
+            <button type="button" class="btn" (click)="buy = false">
+                <i class="fa fa-arrow-left text-primary fa-2x" aria-hidden="true"></i>
+            </button>
+            <div class="space-filler"></div>
+
+            
+            <mat-form-field class="mr-3 w-30">
+                <mat-select value="primary">
+                    <mat-option value="primary"> primary </mat-option>
+                    <mat-option value="secondary" > secondary </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <input type="text" class="form-control search-box w-40 w-md-30" name="" id="" placeholder="&#xF002; Search" (keyup)="applyFilter($event)" />
+        </span>
+
+        <mat-table [dataSource]="dataSource" class="w-100 table-responsive-sm mt-2">
+
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="time">
+                            <mat-header-cell *matHeaderCellDef> TIME </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="time"> {{offer.time}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="commodity">
+                            <mat-header-cell *matHeaderCellDef> COMMODITY </mat-header-cell>
+                                <mat-cell *matCellDef="let offer; let i = index" data-label="commodity">
+                                     {{offer.commodity}}
+                                </mat-cell>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="transactionID">
+                            <mat-header-cell *matHeaderCellDef> TRANSACTION ID </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="transaction id"> {{offer.transactionID}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="size">
+                            <mat-header-cell *matHeaderCellDef> SIZE </mat-header-cell>
+                            <mat-cell *matCellDef="let offer" data-label="size"> {{offer.size}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="bidPrice">
+                            <mat-header-cell *matHeaderCellDef> BID PRICE </mat-header-cell>
+                            <mat-cell *matCellDef="let offer; let i = index" data-label="bid price"> 
+                                ₦ {{offer.bidPrice}}
+                             </mat-cell>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef> ACTION </mat-header-cell>
+                            <mat-cell *matCellDef="let offer; let i = index" data-label="action"> 
+                                <button type="button" class="btn btn-success tb-buy-btn" *ngIf="offer.action == 'buy'" (click)="callBuyDialog()">BUY</button>
+                                <button type="button" class="btn tb-trade-btn" *ngIf="offer.action == 'trade'" (click)="callTradeDialog()">TRADE</button>
+                             </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator [length]="resultsLength" [pageSize]="5" #firstpaginator="matPaginator"></mat-paginator>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="card mat-elevation-z6 mt-4 mt-md-0">
+            <div class="card-body px-0">
+            <div class="w-100 font-weight-bold text-center">Owned Commodity</div>
+                <mat-list role="list" dense>
+                    <mat-list-item role="listitem" *ngFor="let item of list" class="list-item text-uppercase">
+                        {{ item.name }}
+                        <span class="space-filler"></span>
+                        <span class="text-success"> {{ item.number }} </span>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #buyDialog>
+    <div matDialogTitle class="text-center h5 text-primary">Buy</div>
+    <div mat-dialog-content>
+        <span class="font-weight-bold">Warehouse: 007AD8</span><br>
+        <mat-form-field class="w-100">
+        <mat-label>Price/ton</mat-label>
+        <mat-select>
+            <mat-option value="price">Price</mat-option>
+            <mat-option value="ton">Ton</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <div class="form-group">
+          <label for=""> Size (tons) </label>
+          <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="1">
+        </div>
+        <div class="form-group">
+          <label for=""> Buy price/ton (₦) </label>
+          <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="7.500">
+          <small id="helpId" class="form-text">
+            <span class="text-muted">Total price</span>
+            <span class="font-weight-bold ml-2">₦ 7,500.00</span>
+          </small>
+        </div>
+    </div>
+    <mat-dialog-actions align="end">
+        <div class="col-6">
+            <button type="button" class="btn btn-light btn-block" matDialogClose="no">Cancel</button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-primary btn-block" matDialogClose="yes">Confirm</button>
+        </div>
+    </mat-dialog-actions>
+</ng-template>
+
+<ng-template #tradeDialog>
+    <div matDialogTitle class="text-center h5 text-primary">
+       <button type="button" class="btn btn-sm font-weight-bold btn-outline-primary mr-1 mr-md-5" [ngClass]="calculateClasses('Bags')" (click)="activeSelection = 'Bags'">Bags</button>
+       <button type="button" cdkFocusInitial class="btn btn-sm font-weight-bold btn-outline-primary mr-1 mr-md-5" [ngClass]="calculateClasses('Tons')" (click)="activeSelection = 'Tons'">Tons</button>
+       <button type="button" class="btn btn-sm font-weight-bold btn-outline-primary" [ngClass]="calculateClasses('Contract')" (click)="activeSelection = 'Contract'">Contract</button>
+    </div>
+    <div mat-dialog-content>
+        <mat-form-field class="w-100">
+        <mat-label>Select Warehouse</mat-label>
+        <mat-select>
+            <mat-option value="warehouse1">Warehouse1</mat-option>
+            <mat-option value="warehouse2">Warehouse2</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <div class="form-group">
+          <label for=""> Set price/ton (₦) </label>
+          <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="7.500">
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Input quantity">
+        </div>
+        
+    </div>
+    <mat-dialog-actions align="end">
+        <div class="col-6">
+            <button type="button" class="btn btn-light btn-block" matDialogClose="no">Cancel</button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-primary btn-block" matDialogClose="yes">Confirm</button>
+        </div>
+    </mat-dialog-actions>
+</ng-template>

@@ -1,31 +1,31 @@
 <div class="row mt-3">
-    <div class="col-md-9 col-12">
+    <div class="col-md-8 col-12">
         <div class="row">
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn" [class.bg-primary] ="activeProduce == 'Coffee'" (click)="activeProduce = 'Coffee'">
+                <div class="card fake-btn" [ngClass]="calculateClasses('Coffee')" (click)="activeProduce = 'Coffee'; reloadChart('Coffee')">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Coffee
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Maize'" (click)="activeProduce = 'Maize'">
+                <div class="card fake-btn"  [ngClass]="calculateClasses('Maize')" (click)="activeProduce = 'Maize'; reloadChart('Maize')">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Maize
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Cocoa'" (click)="activeProduce = 'Cocoa'">
+                <div class="card fake-btn"  [ngClass]="calculateClasses('Cocoa')" (click)="activeProduce = 'Cocoa'; reloadChart('Cocoa')">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
                         Cocoa
                     </div>
                 </div>
             </div>
             <div class="col-4 mb-3 col-md-auto">
-                <div class="card fake-btn"  [class.bg-primary] ="activeProduce == 'Soybean'" (click)="activeProduce = 'Soybean'">
+                <div class="card fake-btn"  [ngClass]="calculateClasses('Soybeans')" (click)="activeProduce = 'Soybeans'; reloadChart('Soybeans')">
                     <div class="card-body px-1 px-md-4 text-center text-bold">
-                        Soybean
+                        Soybeans
                     </div>
                 </div>
             </div>
@@ -125,44 +125,32 @@
             </mat-list>
            </div>
 
-            <div class="chart">
-                <canvas baseChart
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [legend]="lineChartLegend"
-                        [chartType]="lineChartType">
-                </canvas>
-            </div>
-            <div class="chart chart-container">
-                <canvas class="canvas2"
-                        baseChart
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [legend]="lineChartLegend"
-                        [chartType]="lineChartType">
-                </canvas>
-            </div>
+            <!-- Chart -->
+            <div class="chart" id="highChartContainer"></div>
         </div>
 
     </div>
 
-    <div class="col-md-3 col-12 d-flex align-items-start pt-md-5 mb-md-5 pl-md-3">
+    <div class="col-md-4 col-12 d-flex align-items-start pt-md-5 mb-md-5 pl-md-4">
         <div class="mt-md-5">
-            <h1 class="text-bold">Balance</h1>
-            <div class="card mat-elevation-z1 w-100">
+            <h1 class="text-bold">Order</h1>
+            <div class="card mat-elevation-z1 w-100 mt-md-5">
                 <div class="card-body">
-                       <form class="w-100">
+                       <form class="w-100 px-3 py-3">
                            <div class="form-group row">
                                <label for="noc" class=" col-form-label">Number of Contract(s)</label>
                                    <input type="text" class="form-control w-100" name="noc" placeholder="">
                            </div>
                            <div class="form-group row">
-                                   <a class="btn btn-secondary btn-block disabled">1 contract equals 30 tons</a>
+                                   <a class="btn btn-secondary btn-block disabled">1 contract equals 
+                                   <span *ngIf="activeProduce == 'Maize' || activeProduce == 'Soybeans'">30</span> 
+                                   <span *ngIf="activeProduce == 'Cocoa'">19.2</span> 
+                                   <span *ngIf="activeProduce == 'Coffee'">18</span> 
+                                   tons
+                                   </a>
                            </div>
                            <div class="form-group row">
-                                    <div class="col-12 text-bold mb-3 pl-1">Delivery</div>
+                                    <div class="col-12 text-bold mb-3 pl-1 mt-3">Delivery</div>
                                         <div class="col col-md-3 mb-2 mb-md-0 px-1">
                                             <button type="button" class="btn balance-btn btn-outline-primary btn-sm text-nowrap px-md-1 h-100">Spot</button>
                                         </div>
@@ -185,7 +173,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-12">
+    <div class="col-md-8 col-12">
          <div class="row mt-5">
             <mat-tab-group mat-stretch-tabs dynamicHeight class="w-100">
                 <mat-tab class="text-bold" label="Pending Offers">
@@ -231,7 +219,7 @@
                                 <button mat-menu-item>Option 2</button>
                                 </mat-menu>
 
-                                <button mat-raised-button [matMenuTriggerFor]="viewOffer" color="primary"> 
+                                <button mat-raised-button [matMenuTriggerFor]="viewOffer" class="mr-md-3 view-btn"> 
                                 VIEW
                                 <mat-icon>keyboard_arrow_down</mat-icon>
                                 </button>
@@ -243,7 +231,7 @@
                             <mat-header-cell *matHeaderCellDef> NEGOTIATE </mat-header-cell>
                             <mat-cell *matCellDef="let offer; let i = index" data-label="negotiate"> 
 
-                                <button mat-raised-button color="warn" (click)="bid(i)"> 
+                                <button mat-raised-button class="bid-btn" (click)="bid(i)"> 
                                 BID
                                 </button>
                              </mat-cell>
@@ -254,7 +242,7 @@
                             <mat-header-cell *matHeaderCellDef> ACCEPT </mat-header-cell>
                             <mat-cell *matCellDef="let offer; let i = index" data-label="accept"> 
 
-                                <button mat-raised-button color="accent" *ngIf="edit( i ) == false"> 
+                                <button mat-raised-button class="btn-success" *ngIf="edit( i ) == false"> 
                                 <mat-icon>check</mat-icon>
                                 </button>
                              </mat-cell>
@@ -310,9 +298,9 @@
             </mat-tab-group>
         </div>
     </div>
-    <div class="col-md-3 col-12 pt-5">
+    <div class="col-md-4 col-12 pt-5 pl-md-4">
     <span class="font-weight-bold">News Update</span>
-        <div class="card mt-2">
+        <div class="card mt-2 mt-md-4">
             <div class="card-header bg-primary text-light">
                 News/Latest Stories
             </div>

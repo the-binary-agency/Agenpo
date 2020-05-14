@@ -9,11 +9,12 @@
       <mat-icon matBadge="15" matBadgeColor="warn" class="h1">notifications_none</mat-icon>
     </button>
   <div class='mr-1 mr-md-4 small balance' *ngIf="sidenav.screenWidth > 840">
-    BALANCE <br>
+    ORDER <br>
     <span class="text-success">N0.00</span>
   </div>
-  <div class="h-100 mr-1 mr-md-4" *ngIf="sidenav.screenWidth > 840">
-    <img class="header-img" src="assets/icons/nestle-icon.png" alt="nestle icon">
+  <div class="h-100 mr-1 mr-md-4 py-2" *ngIf="sidenav.screenWidth > 840">
+    <img class="header-img" src="assets/icons/nestle-icon.png" alt="nestle icon" *ngIf="router.url != '/position'">
+    <img class="header-img" src="assets/icons/fsdh-icon.png" alt="fsdh icon" *ngIf="router.url == '/position'">
   </div>
   <mat-menu #appMenu="matMenu">
     <button mat-menu-item>Dropdown 1</button>
@@ -21,11 +22,12 @@
   </mat-menu>
 
   <button mat-icon-button [matMenuTriggerFor]="appMenu" class="mr-md-4" *ngIf="sidenav.screenWidth > 840">
-    Nestle
+    <span *ngIf="router.url != '/position'"> Nestle </span>
+    <span *ngIf="router.url == '/position'"> NSDH </span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
 
-  <!-- moobile menu options -->
+  <!-- mobile menu options -->
 
 <button mat-icon-button [matMenuTriggerFor]="resMenu" *ngIf="sidenav.screenWidth < 840">
     <mat-icon>more_vert</mat-icon>
@@ -47,19 +49,21 @@
     </button>
     <button mat-menu-item>
         <div class="small balance">
-            BALANCE <br>
+            ORDER <br>
             <span class="text-success">N0.00</span>
         </div>
     </button>
     <button mat-menu-item>
-       <div class="h-100">
-        <img class="h-100" src="assets/icons/nestle-icon.png" alt="nestle icon">
+      <div class="h-100">
+        <img class="h-100" src="assets/icons/nestle-icon.png" alt="nestle icon" *ngIf="router.url != '/position'">
+        <img class="h-100" src="assets/icons/fsdh-icon.png" alt="nestle icon" *ngIf="router.url == '/position'">
       </div>
     </button>
     <button mat-menu-item [matMenuTriggerFor]="subMenu">
-        <button mat-icon-button>
-            Nestle
-        </button>
+      <button mat-icon-button>
+        <span *ngIf="router.url != '/position'"> Nestle </span>
+        <span *ngIf="router.url == '/position'"> NSDH </span>
+      </button>
     </button>
 </mat-menu>
 </mat-toolbar>

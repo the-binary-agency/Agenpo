@@ -2,6 +2,17 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import * as Highcharts from 'highcharts';
+
+declare var require: any;
+let Boost = require('highcharts/modules/boost');
+let noData = require('highcharts/modules/no-data-to-display');
+let More = require('highcharts/highcharts-more');
+
+Boost(Highcharts);
+noData(Highcharts);
+More(Highcharts);
+noData(Highcharts);
 
 export interface PendingOffers {
   trader: string;
@@ -33,16 +44,16 @@ const ELEMENT_DATA: PendingOffers[] = [
 ];
 
 const TRANSACTION_HISTORY: TransactionHistory[] = [
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '423,000' },
-  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: '111,000' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
+  {sn: 0,transactionId: 'CX32ML/WNXV', deliveryDate: '4-02-20', status: 'completed' },
 ];
 
 @Component({
@@ -59,12 +70,14 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    Highcharts.chart('highChartContainer', this.highchartoptions);
     this.dataSource.paginator = this.paginator;
     this.historySource.paginator = this.historypaginator;
   }
+  
   detailsExpanded: boolean = false;
 
-  public lineChartOptions = {
+  public lineCharthighchart = {
     scaleShowVerticalLines: false,
     responsive: true
   };
@@ -106,5 +119,39 @@ export class HomeComponent implements OnInit {
   }
 
   activeProduce: string = 'Coffee';
+
+  calculateClasses( produce ) {
+        return {
+            'bg-primary': this.activeProduce == produce,
+            'text-white': this.activeProduce == produce
+        };
+  }
+  
+  // HighCharts
+  public highchartoptions: any = {
+    chart: {
+      type: 'line',
+    },
+    title: {
+      text: ''
+    },
+    credits: {
+      enabled: false
+    },
+    xAxis: {
+     categories:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    },
+    series: [
+      {
+        name: this.activeProduce,
+        data: [500, 700, 555, 444, 777, 877, 944, 567, 666, 789, 456, 654]
+      }
+    ]
+  }
+
+  reloadChart( produce ) {
+    this.highchartoptions.series[ 0 ].name = produce;
+    Highcharts.chart('highChartContainer', this.highchartoptions);
+  }
 
 }
