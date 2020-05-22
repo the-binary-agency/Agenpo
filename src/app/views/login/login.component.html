@@ -2,6 +2,12 @@
     <div class="w-100 text-center p-4 font-weight-bold h1">
         Login
     </div>
+    <div class="text-right w-100">
+        <span class="badge badge-pill badge-outline badge-danger mb-4 h5" *ngIf="error">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            {{ error }}
+        </span>
+    </div>
     <form [formGroup]="LoginForm" (ngSubmit)="login(LoginForm.value)">
         <div class="form-group">
             <label for="username">Username</label>
@@ -12,9 +18,15 @@
         <input type="password" class="form-control" formControlName="password" placeholder="Password">
         </div>
 
-        <button type="submit" class="btn btn-primary float-right w-md-40" [disabled]="loading">
-            Submit
-            <i class="fa fa-circle-o-notch fa-spin  fa-fw ml-2" *ngIf="loading"></i>
-        </button>
+        
+            <button type="submit" class="btn btn-primary float-right w-md-40" [disabled]="loading">
+                Login
+                <i class="fa fa-circle-o-notch fa-spin  fa-fw ml-2" *ngIf="loading"></i>
+            </button>
+        <br><br>
+
+        <p>
+            Don't have an account? <a routerLink="/signup">Register now</a>
+        </p>
     </form>
 </div>

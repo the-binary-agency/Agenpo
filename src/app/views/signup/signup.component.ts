@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/auth/api.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,7 @@ import { ApiService } from 'src/app/auth/api.service';
 })
 export class SignupComponent implements OnInit {
 
-   constructor(private formBuilder: FormBuilder, private Api: ApiService) { }
+   constructor(private formBuilder: FormBuilder, private Api: ApiService, private login: LoginComponent) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -30,7 +31,7 @@ export class SignupComponent implements OnInit {
     ],
     'email': [
       { type: 'required', message: 'An email is required.' },
-      { type: 'pattern', message: 'Please enter a valid business email' }
+      { type: 'pattern', message: 'Please enter a valid email' }
     ],
     'password': [
       { type: 'required', message: 'A Password is required.' },
@@ -46,10 +47,10 @@ export class SignupComponent implements OnInit {
         Validators.required ] ) ),
       email: new FormControl( '', Validators.compose( [
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)+.[a-zA-Z0-9-.]+$')
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ] ) ),
       username: new FormControl( '', Validators.compose( [
-        Validators.minLength( 4 ),
+        // Validators.minLength( 4 ),
         Validators.required ] ) ),
       password: new FormControl( '', Validators.compose( [
         Validators.required,
@@ -68,6 +69,11 @@ export class SignupComponent implements OnInit {
   
   handleResponse( data ) {
     this.loading = false;
+    let details = {
+      username: this.RegisterForm.get( 'username' ),
+      password: this.RegisterForm.get( 'password' )
+    }
+    this.login.login( details );
     console.log(data);
   }
 

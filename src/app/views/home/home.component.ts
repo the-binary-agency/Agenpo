@@ -73,14 +73,9 @@ export class HomeComponent implements OnInit {
   constructor(private api :ApiService, private token : TokenService,private Auth: AuthService) { }
 
   ngOnInit(): void {
-    Highcharts.chart('highChartContainer', this.highchartoptions);
     this.dataSource.paginator = this.paginator;
     this.historySource.paginator = this.historypaginator;
-    console.log('authstatus is ', this.Auth.loggedIn);
-    this.api.getUser(3).subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    )
+    Highcharts.chart('highChartContainer', this.highchartoptions);
   }
   
   detailsExpanded: boolean = false;

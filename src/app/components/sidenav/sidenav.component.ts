@@ -17,19 +17,16 @@ export class SidenavComponent implements OnInit {
     this.changeSidenavMode();
    }
 
-  public loggedIn;
+  public loggedIn: boolean;
   // public Admin = this.Auth.adminStatus;
   screenWidth: number;
   lastHome: string;
 
   ngOnInit(): void {
-    this.Auth.loggedIn.subscribe( data => {
-      this.loggedIn = data;
-    } )
+    this.Auth.authStatus.subscribe( value => this.loggedIn = value )
    }
   
   ngAfterViewInit(): void {
-    console.log(this.loggedIn);
    this.sideNavService.sideNavToggleSubject.subscribe(()=> {
       this.sidenav.toggle();
    } );

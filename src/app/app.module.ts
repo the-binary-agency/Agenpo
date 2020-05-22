@@ -53,6 +53,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
       useClass: TokenInterceptor,
       multi: true
     },
+    LoginComponent
     // JwtHelperService
   ],
   bootstrap: [AppComponent]

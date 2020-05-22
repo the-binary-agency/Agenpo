@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
+  error;
   loading: boolean = false;
   public LoginForm: FormGroup;
   validation_messages = {
@@ -49,6 +50,7 @@ export class LoginComponent implements OnInit {
 
   login(Form){
     this.loading = true;
+    this.error = null;
     this.Api.authenticateUser(Form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
@@ -59,12 +61,14 @@ export class LoginComponent implements OnInit {
     this.loading = false;
     this.Token.set( data.token );
     this.Auth.encryptID( data.id );
+    this.Auth.changeAuthStatus( true );
     this.router.navigateByUrl( '/home' );
     console.log(data);
   }
 
   handleError( error ) {
     this.loading = false;
+    this.error = error.error.message;
     console.log(error.error);
   }
   
