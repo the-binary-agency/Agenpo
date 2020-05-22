@@ -3,6 +3,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as Highcharts from 'highcharts';
+import { ApiService } from 'src/app/auth/api.service';
+import { TokenService } from 'src/app/auth/token.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
@@ -67,12 +70,17 @@ export class HomeComponent implements OnInit {
   @ViewChild( 'firstpaginator', { static: true } ) paginator: MatPaginator;
   @ViewChild( 'historypaginator', { static: true } ) historypaginator: MatPaginator;
   
-  constructor() { }
+  constructor(private api :ApiService, private token : TokenService,private Auth: AuthService) { }
 
   ngOnInit(): void {
     Highcharts.chart('highChartContainer', this.highchartoptions);
     this.dataSource.paginator = this.paginator;
     this.historySource.paginator = this.historypaginator;
+    console.log('authstatus is ', this.Auth.loggedIn);
+    this.api.getUser(3).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
   }
   
   detailsExpanded: boolean = false;

@@ -65,6 +65,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .w-md-50{
     width: 50% !important;
   }
+  .w-md-60{
+    width: 60% !important;
+  }
   .w-md-70{
     width: 70% !important;
   }
