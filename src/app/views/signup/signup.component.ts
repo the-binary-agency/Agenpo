@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
     } );
   }
 
-  register(Form){
+  register( Form ) {
     this.loading = true;
     this.Api.registerUser(Form).subscribe(
       data => this.handleResponse(data),
@@ -69,9 +69,9 @@ export class SignupComponent implements OnInit {
   
   handleResponse( data ) {
     this.loading = false;
-    let details = {
-      username: this.RegisterForm.get( 'username' ),
-      password: this.RegisterForm.get( 'password' )
+     let details = {
+      username: this.RegisterForm.get( 'username' ).value,
+      password: this.RegisterForm.get( 'password' ).value
     }
     this.login.login( details );
     console.log(data);

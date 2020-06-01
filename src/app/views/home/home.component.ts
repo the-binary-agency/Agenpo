@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.historySource.paginator = this.historypaginator;
-    Highcharts.chart('highChartContainer', this.highchartoptions);
+    Highcharts.chart( 'highChartContainer', this.highchartoptions );
   }
   
   detailsExpanded: boolean = false;
